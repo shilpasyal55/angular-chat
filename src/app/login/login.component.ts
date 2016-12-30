@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
                                         },
 
                               () => {
-                                   this._router.navigate(["/messages"]);                
+                                   this._router.navigate(["/chatrooms"]);                
                                         
                                     }
                         );

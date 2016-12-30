@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
                               data => {this.data = JSON.stringify(data);
                                         alert(this.data);
                                         Cookie.set('id',data.id)
-                                        this._router.navigate(['/messages']) 
+                                        this._router.navigate(['/chatrooms']) 
                                       },
                               error => {console.log(JSON.stringify(error));
                                          this.error_msg = error._body;

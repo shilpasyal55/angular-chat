@@ -12,6 +12,7 @@ import { routes } from './app.routes';
 import { MessagesComponent } from './messages/messages.component';
 import { MessageService } from './message.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ChatroomsComponent } from './chatrooms/chatrooms.component';
 
 @NgModule({
   imports: [BrowserModule,ReactiveFormsModule, HttpModule, routes, FormsModule, InfiniteScrollModule],
@@ -20,7 +21,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     MessagesComponent,
     NavbarComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ChatroomsComponent
+    
   ],
   providers: [
     MessageService,

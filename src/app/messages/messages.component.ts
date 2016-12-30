@@ -3,7 +3,7 @@ import { Broadcaster } from 'ng2-cable/js/index';
 import { MessageService } from '../message.service';
 import { Cookie } from 'ng2-cookies/ng2-cookies';
 import { Router  } from '@angular/router';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -16,19 +16,20 @@ export class MessagesComponent implements OnInit {
   public page: number = 1;
   public currentSender: any;
   public message: any = {};
-
+  public chat_room_id;
   constructor(private messageService: MessageService,
-              private broadcaster: Broadcaster, private _router : Router) {
+              private broadcaster: Broadcaster, private _router : Router,private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.chat_room_id = this.route.snapshot.params['id'];
     this.checkUser();
     this.loadMessages();
     this.initEvents();
   }
 
   loadMessages() {
-    this.messageService.query(this.page).subscribe(
+    this.messageService.query(this.page,this.chat_room_id).subscribe(
       (messages) => {
         this.messages = messages.reverse().concat(this.messages);
       }
@@ -38,6 +39,7 @@ export class MessagesComponent implements OnInit {
 
   createMessage() {
     this.message['user_id'] = this.currentSender;
+    this.message['chat_room_id'] = this.chat_room_id;
     this.messageService.create({message: this.message}).subscribe(
       ()=> {
         this.message = {};
