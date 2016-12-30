@@ -1,0 +1,35 @@
+
+
+<h1>SIGN UP</h1>
+<h2><a (click)="login()">LOGIN</a></h2>
+<form [formGroup]="userForm" (ngSubmit)="submitUser()">
+	<div>
+	<input placeholder="email" type="text" formControlName="email">
+	
+	<div *ngIf="userForm.controls['email'].hasError('required') && userForm.controls['email'].touched" class="alert alert-danger"> <span style="color:#f00">Please Enter Email</span></div>
+	</div>
+
+	<div formGroupName="passwords">
+	<input type="password" placeholder="Password" formControlName="password" >
+	<div *ngIf="userForm.controls['passwords'].controls['password'].invalid && !userForm.controls['passwords'].controls['password'].pristine">
+          <small class="text-danger">
+        Password is required
+      </small>
+    </div>
+	</div>
+
+	<div formGroupName="passwords">
+	<input type="password" placeholder="Confirm Password" formControlName="confirmPassword" >
+
+	<div *ngIf="(userForm.controls['passwords'].invalid || userForm.controls['passwords'].controls['confirmPassword'].invalid)
+      && !userForm.controls['passwords'].controls['confirmPassword'].pristine"><small class="text-danger">
+        Password mismatch
+      </small>
+      </div>
+	</div>
+
+	<br>
+	<div>	
+	<button color="warn" type="submit" [disabled]="!userForm.valid"> Submit</button>
+	</div>
+</form>
